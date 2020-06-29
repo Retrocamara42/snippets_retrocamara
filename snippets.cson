@@ -1,0 +1,20 @@
+'.source.python':
+  'bar.plotfull':
+    'prefix': 'barplotfull'
+    'body': 'plt.bar(x=${1:index}, height=${2:values}, width=${3:0.8}, bottom=${4:0}, align="${5:center}", alpha=${6:0.8}, color="${7:r}", label="${8:data1}")$9'
+
+  'bar.plot':
+    'prefix': 'barplot'
+    'body': 'plt.bar(x=${1:index}, height=${2:values})$3'
+
+  'heatmap.plot':
+    'prefix': 'barplot'
+    'body': 'plt.bar(x=${1:index}, height=${2:values})$3'
+
+  'chunks.bigdata':
+     'prefix': 'chunks'
+     'body': """
+      for chunk in pd.read_csv("${1:./input/input.csv}", chunksize=${2:5000}):
+         df = chunk.copy()
+         $3
+      """
