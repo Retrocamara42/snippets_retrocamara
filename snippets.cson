@@ -38,7 +38,7 @@
         $2
      '''
 
-   'train-testsplit.datas':
+   'train-test-split.ml':
       'prefix': 'train-test-split'
       'body': 'X_train, X_test, y_train, y_test = train_test_split(${1:X}, ${2:y}, test_size=${3:0.2}, random_state=${4:42})$5'
 
@@ -51,3 +51,31 @@
         ${2:X_train_norm} = pd.DataFrame(x_norm, columns=${1:X_train}.columns)
         $3
       '''
+
+   'drop-columns.datas':
+      'prefix': 'drop-cols'
+      'body': '${1:df} = ${1:df}.drop(columns=["${2:columna}"])$3'
+
+   'filter.datas':
+      'prefix': 'filter'
+      'body': '${1:df} = ${1:df}[(${1:df}[${2:row_range},"${3:column_range}"] ${4:==} ${5:"comp1"}) ${6:&} (${1:df}[${7::},"${8:column_range}"]) ${9:>} ${10:0}]$11'
+
+   'describe.datas':
+      'prefix': 'describe'
+      'body': '${1:df}.${2:column}.describe()$3'
+
+   'jointplot.plot':
+      'prefix': 'jointplot'
+      'body': 'sns.jointplot(x="${1:col1}", y="${2:col2}", data=${3:df}, kind="hex")$4'
+
+   'boxplot.plot':
+      'prefix': 'boxplot'
+      'body': 'sns.boxplot(x=${1:df}["${2:column}"])$3'
+
+   'mapping.datas':
+      'prefix': 'mapping'
+      'body': '${1:df}["${2:columna}"].map(lambda e: ${3:transformColumn(e)})$4'
+
+   'apply.datas':
+      'prefix': 'apply'
+      'body': '${1:df}.apply(${2:transformDf}, axis="columns")$3'
